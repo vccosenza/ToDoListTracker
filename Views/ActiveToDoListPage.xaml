@@ -8,14 +8,6 @@
              x:Name="ActiveListRoot"
              x:DataType="vm:ActiveToDoListViewModel">
     
-    <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior EventName="Loaded"
-                                        BindingContext="{Binding BindingContext, Source={x:Reference ActiveListRoot}, x:DataType=ContentPage}"
-                                        Command="{Binding FocusEntryOnNewCommand}"
-                                        CommandParameter="{x:Reference NameEntry}"/>
-    
-    </ContentPage.Behaviors>
-    
     <Grid RowDefinitions="Auto,*,Auto" 
           Padding="20"
           BackgroundColor="WhiteSmoke">
@@ -25,7 +17,14 @@
                Placeholder="Enter list name"
                ReturnCommand="{Binding UpdateNameCommand}"
                ReturnCommandParameter="{x:Reference NameEntry}"
-               Text="{Binding ListName}" />
+               Text="{Binding ListName}" >
+            <Entry.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="TextChanged"
+                                                BindingContext="{Binding BindingContext, Source={x:Reference ActiveListRoot}, x:DataType=ContentPage}"
+                                                Command="{Binding UpdateNameCommand}"
+                                                CommandParameter="{x:Reference NameEntry}"/>
+            </Entry.Behaviors>
+        </Entry>
 
         <!-- List of To-Do Items -->
         <CollectionView Grid.Row="1"

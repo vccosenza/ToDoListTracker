@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 using ToDoListTracker.Services.Interfaces;
 using ToDoListTracker.ViewModels;
 
@@ -20,6 +23,8 @@ public class NavigationService : INavigationService
         
         // Navigate to the route
         await Shell.Current.GoToAsync(pageRoute, animate);
+        
+        // this is where we could add in some initialize async logic
     }
 
     public async Task NavigateBackAsync(bool animate = true)

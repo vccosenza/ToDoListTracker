@@ -21,7 +21,7 @@
                             ItemsSource="{Binding GroupedToDoLists}"
                             IsGrouped="True">
                 <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate x:DataType="vm:ToDoListGroup">
+                    <DataTemplate x:DataType="models:ToDoListGroup">
                         <Grid Padding="10">
                             <Label Text="{Binding Name}"
                                    FontSize="18"

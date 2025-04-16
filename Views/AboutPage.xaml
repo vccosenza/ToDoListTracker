@@ -3,15 +3,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDoListTracker.Views.AboutPage">
-    <ContentPage.Content>
+       <ContentPage.Content>
         <VerticalStackLayout Padding="56"
                              Spacing="24"
                              BackgroundColor="WhiteSmoke">
-            <Label Text="Welcome to a Basic ToDo List Tracker!"
-                   TextColor="DodgerBlue"
-                   FontAttributes="Bold"
-                   FontSize="18"
-                   HorizontalOptions="Center"/>
+               
+               <!-- TODO - add styles for all labels and controls when makes sense -->
+               <Label Text="Welcome to a Basic ToDo List Tracker!"
+                      TextColor="DodgerBlue"
+                      FontAttributes="Bold"
+                      FontSize="18"
+                      HorizontalOptions="Center"/>
             <Label Text="With this tracker you can track all of the tasks you want.. in memory.."
                    HorizontalOptions="Center"
                    TextColor="DodgerBlue"/>

@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ToDoListTracker.Models;
@@ -29,7 +33,7 @@ public partial class HomeViewModel: BaseViewModel
     [RelayCommand]
     private void LoadLists()
     {
-        _toDoListService.SetActiveList(Guid.Empty); // Clear current active list
+        _toDoListService.SetActiveList(Guid.Empty);
 
         var toDoLists = _toDoListService.GetAllLists();
         RefreshGroupedLists(toDoLists);
@@ -90,12 +94,3 @@ public partial class HomeViewModel: BaseViewModel
     }
 }
 
-public class ToDoListGroup : ObservableCollection<ToDoList>
-{
-    public string Name { get; }
-    
-    public ToDoListGroup(string name, IEnumerable<ToDoList> lists) : base(lists)
-    {
-        Name = name;
-    }
-}
