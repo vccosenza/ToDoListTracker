@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoListTracker.Views.AboutPage">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="56"
+                             Spacing="24"
+                             BackgroundColor="WhiteSmoke">
+            <Label Text="Welcome to a Basic ToDo List Tracker!"
+                   TextColor="DodgerBlue"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   HorizontalOptions="Center"/>
+            <Label Text="With this tracker you can track all of the tasks you want.. in memory.."
+                   HorizontalOptions="Center"
+                   TextColor="DodgerBlue"/>
+            <Label Text="The logical next app steps included saving data so it is not a blank state on every load"
+                   HorizontalOptions="Center"
+                   TextColor="DodgerBlue"/>
+            <Label Text="Whether that is in a local db, cloud db, or even just local storage for a small app like this"
+                   HorizontalOptions="Center"
+                   TextColor="DodgerBlue"/>
+            
+            <Label Text="Other upgrades to the app include due date notifications, sorting and filter lists, etc."
+                   HorizontalOptions="Center"
+                   TextColor="DodgerBlue"/>
+            
+            <Label Text="For now, enjoy a simple experience with one simple to do list service"
+                   HorizontalOptions="Center"
+                   TextColor="DodgerBlue"/>
+            
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

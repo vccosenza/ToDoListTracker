@@ -1,0 +1,90 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ToDoListTracker.Models"
+             xmlns:vm="clr-namespace:ToDoListTracker.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ToDoListTracker.Views.HomePage"
+             x:Name="HomePageRoot"
+             x:DataType="vm:HomeViewModel">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing"
+                                        BindingContext="{Binding BindingContext, Source={x:Reference HomePageRoot}, x:DataType=ContentPage}"
+                                        Command="{Binding LoadListsCommand}"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="*, Auto" Padding="10" BackgroundColor="WhiteSmoke">
+
+            <!-- Grouped CollectionView -->
+            <CollectionView Grid.Row="0"
+                            ItemsSource="{Binding GroupedToDoLists}"
+                            IsGrouped="True">
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate x:DataType="vm:ToDoListGroup">
+                        <Grid Padding="10">
+                            <Label Text="{Binding Name}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ToDoList">
+                        <Border BackgroundColor="DodgerBlue">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="Red"
+                                               Command="{Binding BindingContext.DeleteToDoListCommand, Source={x:Reference HomePageRoot}}"
+                                               CommandParameter="{Binding .}" />
+                                </SwipeView.RightItems>
+                                <Grid Padding="10"
+                                      ColumnDefinitions="*,3*"
+                                      BackgroundColor="#f0f0f0">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Name}" 
+                                           FontSize="16" 
+                                           TextColor="Black"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" />
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.OpenToDoListCommand, Source={x:Reference HomePageRoot}}" 
+                                                              CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </SwipeView>
+                            
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout>
+                        <Label Text="Create a New List to Start Planning Tasks!"
+                               FontSize="20"
+                               TextColor="Black"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+            <!-- New List Button -->
+            <Button Text="New List"
+                    Command="{Binding OpenToDoListCommand}"
+                    Grid.Row="1"
+                    VerticalOptions="End"
+                    BackgroundColor="DodgerBlue"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    Padding="10">
+                <Button.ImageSource>
+                    <FontImageSource Glyph="&#x2b;" FontFamily="MaterialIcons" Color="White" Size="20" />
+                </Button.ImageSource>
+            </Button>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

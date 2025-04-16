@@ -1,0 +1,82 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoListTracker.Views.ActiveToDoListPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:models="clr-namespace:ToDoListTracker.Models"
+             xmlns:vm="clr-namespace:ToDoListTracker.ViewModels"
+             Title="{Binding ListName}"
+             x:Name="ActiveListRoot"
+             x:DataType="vm:ActiveToDoListViewModel">
+    
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Loaded"
+                                        BindingContext="{Binding BindingContext, Source={x:Reference ActiveListRoot}, x:DataType=ContentPage}"
+                                        Command="{Binding FocusEntryOnNewCommand}"
+                                        CommandParameter="{x:Reference NameEntry}"/>
+    
+    </ContentPage.Behaviors>
+    
+    <Grid RowDefinitions="Auto,*,Auto" 
+          Padding="20"
+          BackgroundColor="WhiteSmoke">
+        <!-- To-Do List Name -->
+        <Entry Grid.Row="0"
+               x:Name="NameEntry"
+               Placeholder="Enter list name"
+               ReturnCommand="{Binding UpdateNameCommand}"
+               ReturnCommandParameter="{x:Reference NameEntry}"
+               Text="{Binding ListName}" />
+
+        <!-- List of To-Do Items -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding ToDoItems}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" 
+                          ColumnDefinitions="Auto,2*,*,Auto,2*,Auto"
+                          ColumnSpacing="16"
+                          x:DataType="models:ToDoItem">
+                        <!-- Checkbox for Completed -->
+                        <CheckBox IsChecked="{Binding IsCompleted}" 
+                                  Grid.Column="0"
+                                  Color="DodgerBlue"/>
+
+                        <!-- Task Name -->
+                        <Entry Grid.Column="1"
+                               Text="{Binding Name}"
+                               FontSize="18" 
+                               VerticalOptions="Center"
+                               TextColor="Black"/>
+                        
+                        <Label Grid.Column="3"
+                               Text="Due Date"
+                               FontSize="18"
+                               TextColor="Black"
+                               VerticalOptions="Center" />
+                        
+                        <DatePicker Grid.Column="4"
+                                    Date="{Binding DueDate}" 
+                                    TextColor="Black"/>
+                        <Button Grid.Column="5"
+                                Text="Delete"
+                                Command="{Binding BindingContext.DeleteToDoItemTaskCommand, Source={x:Reference ActiveListRoot}}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="DodgerBlue"
+                                TextColor="White">
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- New Task Button -->
+        <Button Grid.Row="2"
+                Text="New Task"
+                Command="{Binding AddToDoItemCommand}"
+                BackgroundColor="DodgerBlue"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="25"
+                Padding="10" />
+    </Grid>
+</ContentPage>
