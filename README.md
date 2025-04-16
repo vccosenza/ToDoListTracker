@@ -4,8 +4,8 @@ Android only - easily can add ios with a new proj file changes
 
 A few notes on this project:
 
-Built with vs code on mac - no solution file by default for a simple one project app - to run, open ToDoListTracker.csproj
-No personal windows system to test on Visual Studio (since vs for mac no longer supported) - can trouble shoot any issues on Windows env
+Built with vs code and Rider on mac environment
+No personal windows system to test on Visual Studio (since vs for mac no longer supported) - was unable to guarntee it ran smoothly on Visual Studio for windows
 Notes - would typically separate out Services and View Models (for large projects especially) into separate projects - overkill for this simple application to show MVVM standards
 
 Thoughts on singleton service to maintain active list - hit or miss for me. Played with using some navigation parameters instead. Ultimately decided to stick with simplicity.
